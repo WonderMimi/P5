@@ -1,0 +1,7 @@
+#home:
+#  path: /
+#  controller: App\Controller\HomeController::index
+#
+#property.index:
+#  path: /property
+#  controller: App\Controller\PropertyController::index
