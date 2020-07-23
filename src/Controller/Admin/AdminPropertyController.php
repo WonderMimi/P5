@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Property;
+use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,7 +47,31 @@ class AdminPropertyController extends AbstractController
 	}
 
 	/**
-	 * @Route("/admin/{id}", name="admin.property.edit")
+	 * @Route("/admin/property/create", name="admin.property.new")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function new(Request $request)
+	{
+		$property = new Property();
+		$form = $this->createForm(PropertyType::class, $property);
+		$form->handleRequest($request);
+
+		if($form->isSubmitted() && $form->isValid())
+		{
+			$this->em->persist($property);
+			$this->em->flush();
+			return $this->redirectToRoute('admin.property.index');
+		}
+
+		return $this->render('admin/property/new.html.twig', [
+			'property'=> $property,
+			'form' => $form->createView()
+		]);
+	}
+
+	/**
+	 * @Route("/admin/property/{id}", name="admin.property.edit")
 	 * @param \App\Entity\Property                      $property
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\Response
