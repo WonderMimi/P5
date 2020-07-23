@@ -59,4 +59,20 @@ class PropertyController extends AbstractController
 			'active_menu' => 'properties'
 		]);
 	}
+
+	/**
+	 * @Route("/Biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
+	 * @param $id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function show($slug, $id): Response
+	{
+		$property = $this->propertyRepository->find($id);
+
+		return $this->render('property/show.html.twig', [
+			'property' => $property,
+			'active_menu' => 'properties'
+		]);
+
+	}
 }

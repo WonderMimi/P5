@@ -15,10 +15,10 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">
-								<a href="#">{{ property.title }}</a>
+								<a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
 							</h5>
 							<div class="card-text">{{ property.postalCode }} {{ property.city }}</div>
-							<div class="text-primary">{{ property.price }} €</div>
+							<div class="text-primary" style="font-weight: bold; font-size: 2rem;">{{ property.price | number_format(0, '', ' ') }} €</div> <!-- TODO CSS --> <!-- number format is 0 nb after comma, then a space to separate thousands  -->
 						</div>
 					</div>
 				</div>
