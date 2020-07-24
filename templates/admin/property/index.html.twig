@@ -4,6 +4,12 @@
 {% block body %}
 	<div class="container mt-4">
 		<h1>Gérer les biens</h1>
+
+<!--  Will display related msg set up in AdminPropertyController -->
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+
 	<div class="text-right">
 		<a href="{{ path('admin.property.new') }}" class="btn btn-success">Ajouter un nouveau bien</a>
 	</div>
@@ -20,7 +26,12 @@
 						<td>{{ property.title }}</td>
 						<td>
 							<a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-primary">Editer</a>
-							<a href="#" class="btn btn-danger">Supprimer</a>
+							<form method="post" action="{{ path('admin.property.delete', {id: property.id}) }}" style="display: inline-block" onsubmit="return confirm('Confirmer la suppression de ce bien.')">  <!--TODO CSS  -->
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">  <!-- this csrf_token will generate a token when form is submitted  -->
+								<button class="btn btn-danger">Supprimer</button>
+							</form>
+{#							<a href="#" class="btn btn-danger">Supprimer</a>#}
 						</td>
 					</tr>
 					{% endfor %}
