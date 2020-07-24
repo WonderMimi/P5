@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -28,6 +29,12 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+	 * @Assert\Length(
+	 *     min=15,
+	 *     minMessage="Le titre doit avoir au moins 15 caractères.",
+	 *     max=150,
+	 *     maxMessage="Votre titre est trop long. Il ne doit pas dépasser 150 caractères"
+	 * )
      */
     private $title;
 
@@ -38,6 +45,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
+	 * @Assert\Range(min=10, max=400)
      */
     private $surface;
 
@@ -53,7 +61,8 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     */
+	 * @Assert\Range(max=20)
+	 */
     private $floor;
 
     /**
@@ -78,6 +87,10 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+	 * @Assert\Regex(
+	 *     pattern=" \^[0-9]{5,5}$\ ",
+	 *     message="Le code postal doit être composé de 5 chiffres"
+	 * )
      */
     private $postal_code;
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb40de6d421b1a1989f9fbf1c2dd47dd",
+    "content-hash": "0ff938bdcaa94b8971fc5328e2c25c84",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -6642,16 +6642,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "5e80f314a2faff6fb97942526e27c528b10acdb8"
+                "reference": "03aeabbff76771ef467a4d9a0574c427bb81d932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/5e80f314a2faff6fb97942526e27c528b10acdb8",
-                "reference": "5e80f314a2faff6fb97942526e27c528b10acdb8",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/03aeabbff76771ef467a4d9a0574c427bb81d932",
+                "reference": "03aeabbff76771ef467a4d9a0574c427bb81d932",
                 "shasum": ""
             },
             "require": {
@@ -6747,7 +6747,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-02T08:42:14+00:00"
+            "time": "2020-07-23T06:35:25+00:00"
         },
         {
             "name": "symfony/var-dumper",
