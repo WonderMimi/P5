@@ -88,7 +88,7 @@ class Property
     /**
      * @ORM\Column(type="string", length=255)
 	 * @Assert\Regex(
-	 *     pattern=" \^[0-9]{5,5}$\ ",
+	 *     pattern=" ^[0-9]{5,5}$^ ",
 	 *     message="Le code postal doit être composé de 5 chiffres"
 	 * )
      */
