@@ -5,3 +5,6 @@
 #property.index:
 #  path: /property
 #  controller: App\Controller\PropertyController::index
+admin:
+  path: /admin
+  controller: App\Controller\Admin\AdminPropertyController::index
