@@ -54,9 +54,12 @@ class PropertyController extends AbstractController
 //		$property = $this->propertyRepository->findNotSold();
 //		$this->em->flush();
 
+		$properties = $this->propertyRepository->findNotSold();
+
 		//Returns the properties listing page
 		return $this->render('property/index.html.twig', [
-			'active_menu' => 'properties'
+			'active_menu' => 'properties',
+			'properties' => $properties
 		]);
 	}
 
