@@ -5,20 +5,24 @@ namespace App\Entity;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
+ * @Vich\Uploadable
  */
 class Property
 {
 	const HEAT = [
-		0 => 'électrique',
-		1 => 'gaz',
-		2 => 'fioul',
-		3 => 'plancher chauffant',
-		4 => 'bois'
-	];
+         		0 => 'électrique',
+         		1 => 'gaz',
+         		2 => 'fioul',
+         		3 => 'plancher chauffant',
+         		4 => 'bois'
+         	];
 
     /**
      * @ORM\Id()
@@ -26,6 +30,19 @@ class Property
      * @ORM\Column(type="integer")
      */
     private $id;
+
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string|null
+	 */
+    private $filename;
+
+	/**
+	 * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+	 * @Assert\Image(mimeTypes="image/jpeg")    // User can only upload .jpeg files
+	 * @var File|null
+	 */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -87,7 +104,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
-	 * @Assert\Regex(
+	 * 	 * 	 * @Assert\Regex(
 	 *     pattern=" ^[0-9]{5,5}$^ ",
 	 *     message="Le code postal doit être composé de 5 chiffres"
 	 * )
@@ -104,15 +121,20 @@ class Property
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
     public function __construct()
 	{
 		$this->created_at = new \DateTime();
 	}
 
 	public function getId(): ?int
-    {
-        return $this->id;
-    }
+             {
+                 return $this->id;
+             }
 
     public function getTitle(): ?string
     {
@@ -221,10 +243,10 @@ class Property
     }
 
 	public function getHeatType()
-	{
-		return self::HEAT [$this->heat];
-
-	}
+         	{
+         		return self::HEAT [$this->heat];
+         
+         	}
 
     public function getCity(): ?string
     {
@@ -285,4 +307,57 @@ class Property
 
         return $this;
     }
+
+	/**
+	 * @return string|null
+	 */
+	public function getFilename(): ?string
+	{
+		return $this->filename;
+	}
+
+	/**
+	 * @param string|null $filename
+	 * @return Property
+	 */
+	public function setFilename(?string $filename): Property
+         	{
+         		$this->filename = $filename;
+         		return $this;
+         	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\File\File|null
+	 */
+	public function getImageFile()
+         	{
+         		return $this->imageFile;
+         	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\File\File $imageFile
+	 * @return Property
+	 */
+	public function setImageFile(File $imageFile): Property
+         	{
+         		$this->imageFile = $imageFile;
+
+				if ($this->imageFile instanceof UploadedFile) {  //this condition checks if an image has been uploaded and update the updated_at field so it is taken into account (know issue)
+					$this->updated_at = new \DateTime('now');
+				}
+         		return $this;
+         	}
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
 }
