@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,9 +30,11 @@ class PropertyController extends AbstractController
 
 	/**
 	 * @Route("Biens", name="property.index")
+	 * @param \Knp\Component\Pager\PaginatorInterface   $paginator
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return Response
 	 */
-	public function index(): Response
+	public function index(PaginatorInterface $paginator, Request $request): Response
 	{
 		// 1 code used to enter first property in DB
 //		$property = new Property();
@@ -54,7 +58,11 @@ class PropertyController extends AbstractController
 //		$property = $this->propertyRepository->findNotSold();
 //		$this->em->flush();
 
-		$properties = $this->propertyRepository->findNotSold();
+		$properties = $paginator->paginate(
+			$this->propertyRepository->findNotSoldQuery(),
+			$request->query->getInt('page', 1),
+			9
+		);
 
 		//Returns the properties listing page
 		return $this->render('property/index.html.twig', [

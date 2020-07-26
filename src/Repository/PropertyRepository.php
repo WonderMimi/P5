@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Property;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -29,14 +30,14 @@ class PropertyRepository extends ServiceEntityRepository
 		return $this->createQueryBuilder('p') // alias for properties
 					->andWhere('p.sold = false');//condition for property not sold
 	}
+
 	/**
-	 * @return Property[]
+	 * @return \Doctrine\ORM\Query
 	 */
-    public function findNotSold(): array
+    public function findNotSoldQuery(): Query
 	{
 		return $this->findQuery()
-					->getQuery()
-					->getResult();
+					->getQuery();
 	}
 
 	/**
