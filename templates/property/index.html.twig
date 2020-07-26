@@ -1,6 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block title %}Nos biens{% endblock %}
 {% block body %}
+	<div class="jumbotron">
+		<div class="container">
+			{{ form_start(form) }}
+			<div class="form-row">
+				<div class="col">
+					{{ form_row(form.minSurface) }}
+				</div>
+				<div class="col">
+					{{ form_row(form.maxPrice) }}
+				</div>
+				<div class="col">
+					<button class="btn btn-primary">Rechercher </button>
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
 	<div class="container mt-3">
 		<h1>Voici tous nos biens</h1>
 

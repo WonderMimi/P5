@@ -7,7 +7,7 @@
 		</h5>
 		<p class="card-text">{{ property.description | nl2br}}</p>
 		<p class="card-text">{{ property.postalCode }} {{ property.city }}</p>
-		<div class="text-primary" style="font-size: 1.5rem; font-weight: bold">{{ property.price | number_format(0, '', ' ') }} €</div>
+		<div class="text-primary" style="font-size: 1.5rem; font-weight: bold">{{ property.price | number_format(0, '', ' ') }} €  <p class="float-right" style="font-weight: normal; font-size: 1.3rem;">{{ property.surface }} m²</p></div>
 	</div>
 </div>
 
