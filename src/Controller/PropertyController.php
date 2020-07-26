@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Entity\Property;
 use App\Entity\PropertySearch;
+use App\Form\ContactType;
 use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -80,17 +83,35 @@ class PropertyController extends AbstractController
 
 	/**
 	 * @Route("/Biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
-	 * @param $id
+	 * @param \App\Entity\Property $property
+	 * @param                      $slug
+	 * @param                      $id
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function show($slug, $id): Response
+	public function show(Property $property, $slug, $id, Request $request): Response
 	{
+//
+		$contact = new Contact();
+		$contact->setProperty($property); //will get the property concerned by contact dynamically
+
+		$form = $this->createForm(ContactType::class, $contact);
+		$form->handleRequest($request);
+
+		if($form->isSubmitted() && $form->isValid())
+		{
+			$this->addFlash('success', 'Votre email a bien été envoyé.');
+			return $this->redirectToRoute('property.show', [
+				'id' => $property->getId(),
+				'slug' => $property->getSlug()
+			]);
+		}
+
 		$property = $this->propertyRepository->find($id);
 
 		return $this->render('property/show.html.twig', [
 			'property' => $property,
-			'active_menu' => 'properties'
+			'active_menu' => 'properties',
+			'form' => $form->createView()
 		]);
-
 	}
 }
