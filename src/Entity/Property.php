@@ -20,7 +20,7 @@ class Property
          		0 => 'électrique',
          		1 => 'gaz',
          		2 => 'fioul',
-         		3 => 'plancher chauffant',
+         		3 => 'chauffage par le sol',
          		4 => 'bois'
          	];
 
@@ -104,10 +104,6 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
-	 * 	 * 	 * @Assert\Regex(
-	 *     pattern=" ^[0-9]{5,5}$^ ",
-	 *     message="Le code postal doit être composé de 5 chiffres"
-	 * )
      */
     private $postal_code;
 

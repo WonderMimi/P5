@@ -2,23 +2,20 @@
 {% block title %}Accueil Agence immobilière{% endblock %}
 {% block body %}
 
-		<div class="jumbotron text-center">
-			<h1>Notre agence est heureuse de vous accueillir</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quia.</p>
-		</div>
+	<div class="jumbotron text-center">
+		<h1>Notre agence est heureuse de vous accueillir</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quia.</p>
+	</div>
 
 	<div class="container">
-		<h2>Nos derniers biens</h2>
+		<h2>Nos 4 derniers biens</h2>
 		<div class="row flex">
 			{% for property in properties %}
 				<div class="col-3">
 					<div class="card">
 
 						{% if property.filename  %}
-{#							<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">#}
-							{#	<img src="/images/properties/{{ property.filename }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">#}
-							{#	<img src="/public/images/properties/5f1d7a0e81163225912584.jpg" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">#}
-								<img src="{{ asset("images/properties/5f1d7a0e81163225912584.jpg") }}" alt="image">  <!-- TODO insert image dynamically  -->
+							<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">
 						{% else %}
 							<img src="{{ asset('images/properties/empty2.jpg') }}" alt="card-img-top">
 						{% endif %}
