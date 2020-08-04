@@ -9,7 +9,7 @@
 			<div class="row mt-10">
 				<div class="col-md-8">
 					{% if property.filename  %}
-						<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">
+						<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" id="img-show"">
 						{% else %}
 							<img src="{{ asset('images/properties/empty2.jpg') }}" alt="card-img-top">
 					{% endif %}

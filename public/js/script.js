@@ -1,6 +1,4 @@
 
-
-
 let contactButton = document.getElementById('contactButton');
 let contactForm = document.getElementById('contactForm');
 

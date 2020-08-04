@@ -8,14 +8,14 @@
 	</div>
 
 	<div class="container">
-		<h2>Nos 4 derniers biens</h2>
+		<h2>Nos 8 derniers biens</h2>
 		<div class="row flex">
 			{% for property in properties %}
 				<div class="col-3">
 					<div class="card">
 
 						{% if property.filename  %}
-							<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">
+							<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" id="img-home">
 						{% else %}
 							<img src="{{ asset('images/properties/empty2.jpg') }}" alt="card-img-top">
 						{% endif %}
