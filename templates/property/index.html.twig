@@ -3,16 +3,17 @@
 {% block body %}
 	<!--  FILTER  -->
 	<div class="jumbotron">
-		<div class="container">
+		<div class="container col-4" id="filter">
+			<h4 class="filter">Filtres</h4>
 			{{ form_start(form) }}
 			<div class="form-row">
-				<div class="col">
+				<div class="col-4">
 					{{ form_row(form.minSurface) }}
 				</div>
-				<div class="col">
+				<div class="col-5">
 					{{ form_row(form.maxPrice) }}
 				</div>
-				<div class="col">
+				<div class="col-3">
 					<button class="btn btn-primary">Rechercher </button>
 				</div>
 			</div>
@@ -20,7 +21,7 @@
 		</div>
 	</div>
 
-	<!-- FILTER RESULTS -->
+	<!-- FILTERED RESULTS -->
 	<div class="container mt-3">
 		<h2>Voici tous nos biens</h2>
 

@@ -8,26 +8,33 @@
 	</div>
 
 	<div class="container">
-		<h2>Nos 8 derniers biens</h2>
+		<h2 class="text-purple">Nos derniers biens</h2>
 		<div class="row flex">
 			{% for property in properties %}
 				<div class="col-3">
-					<div class="card">
-
+					<a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">
+					<div class="card" data-lat data-lng>
+{#						top part of the card with image#}
 						{% if property.filename  %}
 							<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" id="img-home">
 						{% else %}
 							<img src="{{ asset('images/properties/empty2.jpg') }}" alt="card-img-top">
 						{% endif %}
-
+{#						bottom pârt of card with text#}
+						<div class="infos-top">
+							<div class="rooms">{{ property.rooms }} pièces</div>
+							<div class="surface">{{ property.surface }} m²</div>
+						</div>
 						<div class="card-body">
-							<h5 class="card-title">
-								<a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
-							</h5>
+							<h5 class="card-title">{{ property.title }}</h5>
 							<div class="card-text">{{ property.postalCode }} {{ property.city }}</div>
-							<div class="text-primary" style="font-weight: bold; font-size: 2rem;">{{ property.price | number_format(0, '', ' ') }} €</div> <!-- TODO CSS --> <!-- number format is 0 nb after comma, then a space to separate thousands  -->
+						</div>
+						<div class="infos-bottom">
+							<div class="text-primary text-purple price">{{ property.price | number_format(0, '', ' ') }} €</div><!-- number format is 0 nb after comma, then a space to separate thousands  -->
+							<button class="btn btn-add-favorite"><i class="fas fa-heart"></i></button>
 						</div>
 					</div>
+					</a>
 				</div>
 
 			{% endfor %}

@@ -1,17 +1,8 @@
 {
-    "devDependencies": {
-        "@symfony/webpack-encore": "^0.30.0",
-        "core-js": "^3.0.0",
-        "jquery": "^3.5.1",
-        "regenerator-runtime": "^0.13.2",
-        "webpack-notifier": "^1.6.0"
-    },
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    }
+  "name": "P5",
+  "version": "1.0.0",
+  "dependencies": {
+    "leaflet": "^1.6.0",
+    "places.js": "^1.19.0"
+  }
 }

@@ -1,18 +1,26 @@
+{#Used to display properties under the "acheter" page#}
 
 <div class="card mb-4">
+	<a href="{{  path('property.show', {slug: property.slug, id: property.id}) }}">
 	{% if property.filename  %}
-		<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" style="width: 100%; height: auto;">
+		<img src="{{ vich_uploader_asset(property) }}" alt="card-img-top" class="card-img-top" id="img-index">
 
 	{% else %}
-		<img src="{{ asset('images/properties/empty2.jpg') }}" alt="card-img-top">
+		<img src="{{ asset('images/properties/empty2.jpg') }}" id="img-index" alt="card-img-top">
 	{% endif %}
-	<div class="card-body">
-		<h5 class="card-title">
-			<a href="{{  path('property.show', {slug: property.slug, id: property.id}) }}">{{ property.title }}</a>
-		</h5>
-		<p class="card-text">{{ property.description | nl2br}}</p>
+		<div class="infos-top">
+			<div class="rooms">{{ property.rooms }} pièces</div>
+			<div class="surface">{{ property.surface }} m²</div>
+		</div>
+	<div class="card-body big">
+		<h5 class="card-title">{{ property.title }}</h5>
+		<p class="card-text">{{ property.description |slice(0,70) | nl2br }}</p>
 		<p class="card-text">{{ property.postalCode }} {{ property.city }}</p>
-		<div class="text-primary" style="font-size: 1.5rem; font-weight: bold">{{ property.price | number_format(0, '', ' ') }} €  <p class="float-right" style="font-weight: normal; font-size: 1.3rem;">{{ property.surface }} m²</p></div>
 	</div>
+		<div class="infos-bottom">
+			<div class="text-primary text-purple big-price">{{ property.price | number_format(0, '', ' ') }} €</div><!-- number format is 0 nb after comma, then a space to separate thousands  -->
+			<button class="btn btn-add-favorite" id="big"><i class="fas fa-heart"></i></button>
+		</div>
+	</a>
 </div>
 

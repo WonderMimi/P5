@@ -17,12 +17,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Property
 {
 	const HEAT = [
-         		0 => 'électrique',
-         		1 => 'gaz',
-         		2 => 'fioul',
-         		3 => 'chauffage par le sol',
-         		4 => 'bois'
-         	];
+                           		0 => 'électrique',
+                           		1 => 'gaz',
+                           		2 => 'fioul',
+                           		3 => 'chauffage par le sol',
+                           		4 => 'bois'
+                           	];
 
     /**
      * @ORM\Id()
@@ -122,15 +122,25 @@ class Property
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=7)
+     */
+    private $lng;
+
     public function __construct()
 	{
 		$this->created_at = new \DateTime();
 	}
 
 	public function getId(): ?int
-             {
-                 return $this->id;
-             }
+   {
+	   return $this->id;
+   }
 
     public function getTitle(): ?string
     {
@@ -239,10 +249,10 @@ class Property
     }
 
 	public function getHeatType()
-         	{
-         		return self::HEAT [$this->heat];
-         
-         	}
+	{
+		return self::HEAT [$this->heat];
+
+	}
 
     public function getCity(): ?string
     {
@@ -317,32 +327,32 @@ class Property
 	 * @return Property
 	 */
 	public function setFilename(?string $filename): Property
-         	{
-         		$this->filename = $filename;
-         		return $this;
-         	}
+	{
+		$this->filename = $filename;
+		return $this;
+	}
 
 	/**
 	 * @return \Symfony\Component\HttpFoundation\File\File|null
 	 */
 	public function getImageFile()
-         	{
-         		return $this->imageFile;
-         	}
+	{
+		return $this->imageFile;
+	}
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\File\File $imageFile
 	 * @return Property
 	 */
 	public function setImageFile(File $imageFile): Property
-         	{
-         		$this->imageFile = $imageFile;
+	{
+		$this->imageFile = $imageFile;
 
-				if ($this->imageFile instanceof UploadedFile) {  //this condition checks if an image has been uploaded and update the updated_at field so it is taken into account (know issue)
-					$this->updated_at = new \DateTime('now');
-				}
-         		return $this;
-         	}
+		if ($this->imageFile instanceof UploadedFile) {  //this condition checks if an image has been uploaded and update the updated_at field so it is taken into account (know issue)
+			$this->updated_at = new \DateTime('now');
+		}
+		return $this;
+	}
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
@@ -352,6 +362,30 @@ class Property
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }
