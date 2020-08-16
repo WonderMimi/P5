@@ -17,12 +17,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Property
 {
 	const HEAT = [
-                           		0 => 'électrique',
-                           		1 => 'gaz',
-                           		2 => 'fioul',
-                           		3 => 'chauffage par le sol',
-                           		4 => 'bois'
-                           	];
+		0 => 'électrique',
+		1 => 'gaz',
+		2 => 'fioul',
+		3 => 'chauffage par le sol',
+		4 => 'bois'
+	];
 
     /**
      * @ORM\Id()

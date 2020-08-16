@@ -28,6 +28,8 @@ contactButton.addEventListener("click", function(e){
 });
 //=====================================================================
 
+let map = document.getElementById('map');
+map.addEventListener('load', Map.init);
 
 
 
