@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -106,4 +106,35 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+	/**
+	 * String representation of object
+	 * @link https://php.net/manual/en/serializable.serialize.php
+	 * @return string the string representation of the object or null
+	 */
+	public function serialize()
+	{
+		return serialize([  // user information we want to keep
+			$this->id,
+			$this->username,
+			$this->password
+		]);
+	}
+
+	/**
+	 *  Constructs the object
+	 * @link https://php.net/manual/en/serializable.unserialize.php
+	 * @param string $serialized <p>
+	 * The string representation of the object.
+	 * </p>
+	 * @return void
+	 */
+	public function unserialize($serialized)
+	{
+		list (  // used to generate new user infos
+			$this->id,
+			$this->username,
+			$this->password
+			) = unserialize($serialized, ['allowed_classes' => false]);  //I don't want to serialize classes
+	}
 }

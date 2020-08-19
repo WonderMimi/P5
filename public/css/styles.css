@@ -1,6 +1,9 @@
-p,
-a {
-    color: #222222;
+:root {
+    scroll-behavior: smooth;
+}
+
+a.nav-link {
+    color: white !important;
 }
 
 .jumbotron.text-center {
@@ -21,6 +24,12 @@ a {
 
 .btn-primary:hover {
     background-color: black;
+}
+
+.right-nav {
+    display: inline-flex;
+    margin-left: 20px;
+    flex-direction: row-reverse;
 }
 
 .infos-top {
@@ -55,6 +64,19 @@ a {
     float: left;
     padding-left: 10px;
     font-size: 3rem;
+}
+
+.card-title {
+    color: #5b355e;
+}
+
+.card-text,
+.page-item a {
+    color: #222222 !important;
+}
+
+span.page-link  {
+    color: white;
 }
 
 .btn-add-favorite {
@@ -173,6 +195,11 @@ footer .container {
 }
 
 #map {
-    height: 512px;
+    height: 350px;
     margin-bottom: 50px;
+}
+
+a.leaflet-control-zoom-in,
+a.leaflet-control-zoom-out {
+    color: #5b355e;
 }

@@ -6,16 +6,17 @@
     <div class="container user-login">
 <form method="post">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>  <!-- displays a translated error message -->
     {% endif %}
 
+{#    message displayed if connected user comes back on login page#}
     {% if app.user %}
         <div class="mb-3">
-            Vous êtes connecté(e) en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            Vous êtes déjà connecté(e) en tant que {{ app.user.username }}
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal mt-4">Merci de vous connecter</h1>
+    <h1>Connexion</h1>
     <label for="inputUsername">Nom d'utilisateur</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -35,8 +36,8 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-lg btn-primary mt-2" type="submit">
+        Se connecter
     </button>
 </form>
     </div>

@@ -1,5 +1,4 @@
 // import Places from 'places.js'
-// TODO: fix import issue
 
 // let inputAddress = document.querySelector('#property_address');
 // let place = Places({
